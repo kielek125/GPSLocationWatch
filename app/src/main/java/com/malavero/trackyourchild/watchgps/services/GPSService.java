@@ -23,8 +23,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.malavero.trackyourchild.watchgps.activities.MainActivity;
 import com.malavero.trackyourchild.watchgps.helpers.AppProperty;
 import com.malavero.trackyourchild.watchgps.helpers.SessionManager;
+import com.malavero.trackyourchild.watchgps.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,11 +69,15 @@ public class GPSService extends Service {
                 @Override
                 public void onLocationChanged(Location location)
                 {
-                    Log.i(TAG,"Location changed");
-                    sendCoordinates(location);
-                    Intent i = new Intent("location_update");
-                    i.putExtra("Coordinates",location.getLongitude()+" "+location.getLatitude()+" "+location.getAltitude());
-                    sendBroadcast(i);
+                    if(Utils.isOnline(getApplicationContext()))
+                    {
+                        Log.i(TAG,"Location changed");
+
+                        sendCoordinates(location);
+                        Intent i = new Intent("location_update");
+                        i.putExtra("Coordinates",location.getLongitude()+" "+location.getLatitude()+" "+location.getAltitude());
+                        sendBroadcast(i);
+                    }
                 }
 
                 @Override

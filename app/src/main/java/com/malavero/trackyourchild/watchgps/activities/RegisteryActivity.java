@@ -54,11 +54,11 @@ public class RegisteryActivity extends Activity {
     }
 
     private void initProperty() {
-        inputFullName = (EditText) findViewById(R.id.name);
+        //inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        //btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -72,16 +72,16 @@ public class RegisteryActivity extends Activity {
     private void registerButton() {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String name = inputFullName.getText().toString().trim();
+                //String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                inputFullName.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                //inputFullName.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 inputEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 inputPassword.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password);
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    registerUser("abc", email, password);
                 } else {
                     Toast.makeText(RegisteryActivity.this,
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -91,15 +91,15 @@ public class RegisteryActivity extends Activity {
         });
 
         // Link to Login Screen
-        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(RegisteryActivity.this,
-                        LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+//        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View view) {
+//                Intent i = new Intent(RegisteryActivity.this,
+//                        LoginActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
     }
 
     /**

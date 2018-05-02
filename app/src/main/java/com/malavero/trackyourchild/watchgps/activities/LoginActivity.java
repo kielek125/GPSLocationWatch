@@ -23,6 +23,7 @@ import com.malavero.trackyourchild.watchgps.helpers.FileManager;
 import com.malavero.trackyourchild.watchgps.helpers.SessionManager;
 import com.malavero.trackyourchild.watchgps.services.AppConfig;
 import com.malavero.trackyourchild.watchgps.services.AppController;
+import com.malavero.trackyourchild.watchgps.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,10 +70,21 @@ public class LoginActivity extends WearableActivity{
         session = new SessionManager(getApplicationContext());
         fm = new FileManager();
         // Check if user is already logged in or not
-        //if (session.isLoggedIn()) {
+        if (session.isLoggedIn())
+        {
             // User is already logged in. Take him to main activity
-        //    checkLogin(session.getEmail(), session.getPassword());
-        //}
+            if(Utils.isOnline(this))
+            {
+                checkLogin(session.getEmail(), session.getPassword());
+            }
+            else
+            {
+                Log.i(TAG,"No internet connection try again later");
+                Toast.makeText(this,"No internet connection try again later", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
     }
 
     private void registerButton() {
@@ -85,7 +97,14 @@ public class LoginActivity extends WearableActivity{
                 // Check for empty data in the form
                 if (!email.isEmpty() && !password.isEmpty()) {
                     // login user
-                    checkLogin(email, password);
+                    if(Utils.isOnline(getApplicationContext()))
+                    {
+                        checkLogin(email, password);
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, "No network connection", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(LoginActivity.this, getString(R.string.app_invalid_input), Toast.LENGTH_LONG)
@@ -146,22 +165,27 @@ public class LoginActivity extends WearableActivity{
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     String body;
-                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
-                        try {
-                            body = new String(error.networkResponse.data, "UTF-8");
-                            JSONObject jObj = new JSONObject(body);
-                            Log.e(TAG, "Registration Error: " + jObj.get("error"));
-                            Toast.makeText(LoginActivity.this, jObj.get("error").toString(), Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    if(error.networkResponse != null)
+                    {
+                        String statusCode = String.valueOf(error.networkResponse.statusCode);
+                        //get response body and parse with appropriate encoding
+                        if (error.networkResponse.data != null) {
+                            try {
+                                body = new String(error.networkResponse.data, "UTF-8");
+                                JSONObject jObj = new JSONObject(body);
+                                Log.e(TAG, "Registration Error: " + jObj.get("error"));
+                                Toast.makeText(LoginActivity.this, jObj.get("error").toString(), Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Log.e(TAG, "Unknown Error: " + error.getMessage());
+                            Toast.makeText(LoginActivity.this, "Unknown error", Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Log.e(TAG, "Unknown Error: " + error.getMessage());
-                        Toast.makeText(LoginActivity.this, "Unknown error", Toast.LENGTH_LONG).show();
+
                     }
                     hideDialog();
+                    Toast.makeText(LoginActivity.this, "No network connection", Toast.LENGTH_LONG).show();
                 }
             }) {
 
