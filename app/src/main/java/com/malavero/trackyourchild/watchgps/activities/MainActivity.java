@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ public class MainActivity extends WearableActivity {
 
     private TextView textView, tv_latitude, tv_longitude, tv_altitude, tv_status;
     private ToggleButton toggleButton;
+    private Button btn_logoff;
     private BroadcastReceiver broadcastReceiver;
     private SessionManager session;
     private String token;
@@ -63,7 +66,21 @@ public class MainActivity extends WearableActivity {
         tv_latitude = (TextView) findViewById(R.id.tv_coordinates_latitude_values);
         tv_longitude = (TextView) findViewById(R.id.tv_coordinates_longitude_values);
         tv_altitude = (TextView) findViewById(R.id.tv_coordinates_altitude_values);
-        tv_status = (TextView) findViewById(R.id.tv_status_info);
+        btn_logoff = (Button) findViewById(R.id.btn_logoff);
+        btn_logoff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                session = new SessionManager(getApplicationContext());
+                if (session.isLoggedIn()) {
+                    session.setLogin(false);
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+        //tv_status = (TextView) findViewById(R.id.tv_status_info);
         session = new SessionManager(getApplicationContext());
         toggleButton = (ToggleButton) findViewById(R.id.tb_service);
         token = session.getToken();
@@ -153,14 +170,14 @@ public class MainActivity extends WearableActivity {
                     Intent service = new Intent(getApplicationContext(), GPSService.class);
                     Log.d("service_enabled", "GPS LOCALIZATION HAS BEEN ENABLED");
                     startService(service);
-                    tv_status.setText(getString(R.string.app_service_enable_description));
+                   // tv_status.setText(getString(R.string.app_service_enable_description));
 
                     //Toast.makeText(MainActivity.this, getString(R.string.app_service_enable_description), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent service = new Intent(getApplicationContext(), GPSService.class);
                     Log.d("service_disabled", "GPS LOCALIZATION HAS BEEN DISABLED");
                     stopService(service);
-                    tv_status.setText(getString(R.string.app_service_disable_description));
+                   // tv_status.setText(getString(R.string.app_service_disable_description));
                     //Toast.makeText(MainActivity.this, getString(R.string.app_service_disable_description), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -216,7 +233,6 @@ public class MainActivity extends WearableActivity {
 
             StringRequest stringRequest = new StringRequest (Request.Method.PUT, AppConfig.URL_UPDATE, new Response.Listener<String>()
             {
-
                 @Override
                 public void onResponse(String response) {
                     try {
@@ -229,6 +245,7 @@ public class MainActivity extends WearableActivity {
                         }
                     } catch (JSONException e)
                     {
+                        fM.saveFile(getApplicationContext(),"error");
                         Log.i(TAG,"File generated successfully");
                         e.printStackTrace();
                     }

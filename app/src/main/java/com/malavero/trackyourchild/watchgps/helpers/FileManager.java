@@ -4,8 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.Toast;
 
+
+import com.malavero.trackyourchild.watchgps.activities.RegisteryActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +21,7 @@ import java.util.Calendar;
  */
 
 public class FileManager {
+    private static final String TAG = RegisteryActivity.class.getSimpleName();
     public void checkPermissionFile(Activity activity){
         if(ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
 
@@ -44,6 +48,7 @@ public class FileManager {
             try {
                 folder.mkdirs();
             } catch (Exception e) {
+                Log.i(TAG,"The catalog has not been created: ");
                 Toast.makeText(context, "The catalog has not been created: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
     }
@@ -53,7 +58,9 @@ public class FileManager {
         if (!file.exists())
             try {
                 file.createNewFile();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
+                Log.i(TAG,"Error while creating file");
                 e.printStackTrace();
             }
 

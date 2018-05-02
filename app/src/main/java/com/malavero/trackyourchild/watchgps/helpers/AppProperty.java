@@ -8,6 +8,6 @@ import android.os.Environment;
 
 public class AppProperty {
     public final static int MEMORY_ACCESS = 5;
-    public final static String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/Logs";
+    public final static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logs";
     public final static String fileName = "/ExceptionsLogs.txt";
 }

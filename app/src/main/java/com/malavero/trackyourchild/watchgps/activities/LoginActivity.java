@@ -69,10 +69,10 @@ public class LoginActivity extends WearableActivity{
         session = new SessionManager(getApplicationContext());
         fm = new FileManager();
         // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
+        //if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            checkLogin(session.getEmail(), session.getPassword());
-        }
+        //    checkLogin(session.getEmail(), session.getPassword());
+        //}
     }
 
     private void registerButton() {
@@ -181,6 +181,7 @@ public class LoginActivity extends WearableActivity{
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         } catch (Exception e) {
             fm.saveFile(this,this,e.getMessage());
+            hideDialog();
         }
     }
     private void showDialog() {
