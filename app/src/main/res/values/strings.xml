@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">GPS Location</string>
+    <string name="app_enable_service">Start service</string>
+    <string name="app_disable_service">Stop service</string>
+    <string name="app_coordinates_label">Coordinates:</string>
+    <string name="app_coordinates_latitude">Latitude:</string>
+    <string name="app_coordinates_longitude">Longitude:</string>
+    <string name="app_coordinates_altitude">Altitude:</string>
+    <string name="app_service_enable_description">Localization service is active</string>
+    <string name="app_service_disable_description">Localization service is not active</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logoff">Logoff</string>
+    <string name="app_registration_title">GPS Location</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_name">Login</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registered? Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="app_settings">Settings</string>
+    <string name="app_invalid_input">"Please enter the credentials!"</string>
+    <string name="app_registration_successful">"User successfully registered. Try login now!"</string>
+    <string name="app_registration_failed">User already exists. Try to type different email</string>
+    <string name="app_coordinates_zero">0</string>
+    <string name="action_save">Save log</string>
+
+</resources>

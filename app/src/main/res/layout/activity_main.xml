@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.malavero.trackyourchild.watchgps.activities.MainActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        >
+
+        <TextView
+            android:id="@+id/coordinateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_toolbar"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/app_coordinates_label"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/tv_coordinates_latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_weight="7"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_coordinates_latitude" />
+
+            <TextView
+                android:id="@+id/tv_coordinates_latitude_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="20sp"
+                android:paddingStart="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_coordinates_zero" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/tv_coordinates_longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_weight="7"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+
+                android:text="@string/app_coordinates_longitude" />
+
+            <TextView
+                android:id="@+id/tv_coordinates_longitude_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="20sp"
+                android:paddingStart="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_coordinates_zero" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <TextView
+                android:id="@+id/tv_coordinates_altitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:layout_weight="7"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_coordinates_altitude" />
+            <TextView
+                android:id="@+id/tv_coordinates_altitude_values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="20sp"
+                android:paddingStart="6dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_coordinates_zero" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ToggleButton
+        android:id="@+id/tb_service"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/toggle_service_selector"
+        android:textColor="@color/colorText"
+        android:textOff="@string/app_enable_service"
+        android:textOn="@string/app_disable_service" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_status_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:text="@string/app_service_disable_description"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
